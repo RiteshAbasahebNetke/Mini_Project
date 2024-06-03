@@ -1,0 +1,19 @@
+﻿
+@{
+    Layout = "~/Areas/UserArea/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html style="background-color:antiquewhite;text-align:center;">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>LogOut</title>
+</head>
+<body>
+    <div>
+        <h1 style="color:deepskyblue;border: thick solid;text-align:center;border-color:black;"> You are logged out succesfully....! </h1>
+        @Html.ActionLink("Click Here To SignIn", "SignIn", "ManageUser",new {area=""})
+    </div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @RenderSection("head", false)
+    <style>
+        ul{
+            display:flex;
+        }
+        li{
+            margin: 10px;
+            display:block;
+            border:2px solid black;
+            padding:10px 30px;
+        }
+
+        li:hover{
+            cursor:pointer;
+            background-color:darkcyan;
+        }
+
+            li a {
+                text-decoration:none;
+                color: white;
+            }
+    </style>
+</head>
+<body>
+    <table width="100%">
+        <tr>
+            <td colspan="5" style="text-align:center;">
+                <div style="display:flex; align-items:center;">
+                    <div>
+                        <span style="font-size:72px;">RITESH</span>
+                    </div>
+                    <div style="width:100%; text-align:right;">
+                        <img width="500" src="~/Images/lodaing.jpg" />
+                    </div>
+                </div>
+            </td>
+
+        </tr>
+        <tr>
+            <td style="background-color:#A67B5B; border: solid; color: black;">
+                <div style="width:100%;">
+                    <div style="margin: 0 auto;width: 50%;">
+                        <ul>
+                            <li> @Html.ActionLink("Home", "Home", "UserHome") </li>
+                            <li> @Html.ActionLink("Category", "Index", "Category") </li>
+                            <li> @Html.ActionLink("Color", "Index", "Color") </li>
+                            <li> @Html.ActionLink("Mfg", "Index", "Mfg") </li>
+                            <li> @Html.ActionLink("Product", "Index", "Product") </li>
+                            <li> @Html.ActionLink("Logout", "LogOut", "ManageUser", new { area = "" }, null) </li>
+                        </ul>
+                    </div>
+                </div>
+                
+
+                </td>
+        </tr>
+        <tr>
+            <td>
+                @RenderSection("news", false)
+            </td>
+        </tr>
+        <tr>
+            <td style="background-color:moccasin; border: solid; color: black;">
+                <hr />
+                @RenderBody()
+                <hr />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @RenderSection("footer", false)
+            </td>
+        </tr>
+        <tr>
+            <td style="background-color: #A67B5B; color: white; border: solid; color: black;">
+                &copy; All rights reserved to RITESH
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

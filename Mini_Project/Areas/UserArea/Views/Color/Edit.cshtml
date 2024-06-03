@@ -1,0 +1,33 @@
+﻿@model Mini_Project.Areas.UserArea.ColorTbl
+@{
+    Layout = "~/Areas/UserArea/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm())
+        {
+            @Html.HiddenFor(p => p.ColorID)
+            <div>
+                @Html.LabelFor(p => p.ColorName)
+                <div>
+                    @Html.EditorFor(p => p.ColorName)
+                </div>
+            </div>
+            <div>
+                <input type="submit" value="Update" />
+            </div>
+        }
+        <div>
+            @Html.ActionLink("Back to Index", "Index")
+        </div>
+    </div>
+</body>
+</html>

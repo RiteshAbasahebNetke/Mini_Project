@@ -1,0 +1,60 @@
+﻿@model Mini_Project.Areas.UserArea.ProductTbl
+@{
+    Layout = "~/Areas/UserArea/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body >
+    <div>
+        @using (Html.BeginForm())
+        {
+            @Html.HiddenFor(p => p.ProductID)
+            <div>
+                @Html.LabelFor(p => p.ProductName)
+                <div>
+                    @Html.EditorFor(p => p.ProductName)
+                </div>
+            </div>
+            <div>
+                @Html.Label("Select MfgName")
+                <div>
+                    @Html.DropDownList("MfgID", "Select MfgName")
+                </div>
+            </div>
+            <div>
+                @Html.LabelFor(p => p.Price)
+                <div>
+                    @Html.EditorFor(p => p.Price)
+                </div>
+            </div>
+            <div>
+                @Html.LabelFor(p => p.ProductDescription)
+                <div>
+                    @Html.EditorFor(p => p.ProductDescription)
+                </div>
+            </div>
+            <div>
+                @Html.Label("Select Category")
+                <div>
+                    @Html.DropDownList("CategoryID", "Select Category")
+                </div>
+            </div>
+            <div>
+                @Html.Action("GenerateCheckBoxList", "CheckBoxList", new { id = Model.ProductID, area = "" })
+            </div>
+            <div>
+                <input type="submit" value="Update" />
+            </div>
+        }
+        <div>
+            @Html.ActionLink("Back to Index", "Index")
+        </div>
+    </div>
+</body>
+</html>

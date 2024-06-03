@@ -1,0 +1,367 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Mini_Project_DbFirstModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CategoryTbl">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ColorTbl">
+          <Key>
+            <PropertyRef Name="ColorID" />
+          </Key>
+          <Property Name="ColorID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ColorName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MfgTbl">
+          <Key>
+            <PropertyRef Name="MfgID" />
+          </Key>
+          <Property Name="MfgID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MfgName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmailID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="WebsiteUrl" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ContactPersonName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductColorTbl">
+          <Key>
+            <PropertyRef Name="ProductColorID" />
+          </Key>
+          <Property Name="ProductColorID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="bigint" Nullable="false" />
+          <Property Name="ColorID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductTbl">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="MfgID" Type="bigint" Nullable="false" />
+          <Property Name="ProductDescription" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CategoryID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserTbl">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmailID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MobileNo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ProductColorTbl_ColorTbl">
+          <End Role="ColorTbl" Type="Self.ColorTbl" Multiplicity="1" />
+          <End Role="ProductColorTbl" Type="Self.ProductColorTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ColorTbl">
+              <PropertyRef Name="ColorID" />
+            </Principal>
+            <Dependent Role="ProductColorTbl">
+              <PropertyRef Name="ColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductColorTbl_ProductTbl">
+          <End Role="ProductTbl" Type="Self.ProductTbl" Multiplicity="1" />
+          <End Role="ProductColorTbl" Type="Self.ProductColorTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductTbl">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="ProductColorTbl">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductTbl_CategoryTbl">
+          <End Role="CategoryTbl" Type="Self.CategoryTbl" Multiplicity="1" />
+          <End Role="ProductTbl" Type="Self.ProductTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryTbl">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="ProductTbl">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductTbl_MfgTbl">
+          <End Role="MfgTbl" Type="Self.MfgTbl" Multiplicity="1" />
+          <End Role="ProductTbl" Type="Self.ProductTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MfgTbl">
+              <PropertyRef Name="MfgID" />
+            </Principal>
+            <Dependent Role="ProductTbl">
+              <PropertyRef Name="MfgID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Mini_Project_DbFirstModelStoreContainer">
+          <EntitySet Name="CategoryTbl" EntityType="Self.CategoryTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ColorTbl" EntityType="Self.ColorTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MfgTbl" EntityType="Self.MfgTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductColorTbl" EntityType="Self.ProductColorTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductTbl" EntityType="Self.ProductTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserTbl" EntityType="Self.UserTbl" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ProductColorTbl_ColorTbl" Association="Self.FK_ProductColorTbl_ColorTbl">
+            <End Role="ColorTbl" EntitySet="ColorTbl" />
+            <End Role="ProductColorTbl" EntitySet="ProductColorTbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductColorTbl_ProductTbl" Association="Self.FK_ProductColorTbl_ProductTbl">
+            <End Role="ProductTbl" EntitySet="ProductTbl" />
+            <End Role="ProductColorTbl" EntitySet="ProductColorTbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductTbl_CategoryTbl" Association="Self.FK_ProductTbl_CategoryTbl">
+            <End Role="CategoryTbl" EntitySet="CategoryTbl" />
+            <End Role="ProductTbl" EntitySet="ProductTbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductTbl_MfgTbl" Association="Self.FK_ProductTbl_MfgTbl">
+            <End Role="MfgTbl" EntitySet="MfgTbl" />
+            <End Role="ProductTbl" EntitySet="ProductTbl" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Mini_Project_DbFirstModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CategoryTbl">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ProductTbls" Relationship="Self.FK_ProductTbl_CategoryTbl" FromRole="CategoryTbl" ToRole="ProductTbl" />
+        </EntityType>
+        <EntityType Name="ColorTbl">
+          <Key>
+            <PropertyRef Name="ColorID" />
+          </Key>
+          <Property Name="ColorID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ColorName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ProductColorTbls" Relationship="Self.FK_ProductColorTbl_ColorTbl" FromRole="ColorTbl" ToRole="ProductColorTbl" />
+        </EntityType>
+        <EntityType Name="MfgTbl">
+          <Key>
+            <PropertyRef Name="MfgID" />
+          </Key>
+          <Property Name="MfgID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MfgName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmailID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="WebsiteUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ContactPersonName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ProductTbls" Relationship="Self.FK_ProductTbl_MfgTbl" FromRole="MfgTbl" ToRole="ProductTbl" />
+        </EntityType>
+        <EntityType Name="ProductColorTbl">
+          <Key>
+            <PropertyRef Name="ProductColorID" />
+          </Key>
+          <Property Name="ProductColorID" Type="Int64" Nullable="false" />
+          <Property Name="ProductID" Type="Int64" Nullable="false" />
+          <Property Name="ColorID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="ColorTbl" Relationship="Self.FK_ProductColorTbl_ColorTbl" FromRole="ProductColorTbl" ToRole="ColorTbl" />
+          <NavigationProperty Name="ProductTbl" Relationship="Self.FK_ProductColorTbl_ProductTbl" FromRole="ProductColorTbl" ToRole="ProductTbl" />
+        </EntityType>
+        <EntityType Name="ProductTbl">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="MfgID" Type="Int64" Nullable="false" />
+          <Property Name="ProductDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CategoryID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="CategoryTbl" Relationship="Self.FK_ProductTbl_CategoryTbl" FromRole="ProductTbl" ToRole="CategoryTbl" />
+          <NavigationProperty Name="MfgTbl" Relationship="Self.FK_ProductTbl_MfgTbl" FromRole="ProductTbl" ToRole="MfgTbl" />
+          <NavigationProperty Name="ProductColorTbls" Relationship="Self.FK_ProductColorTbl_ProductTbl" FromRole="ProductTbl" ToRole="ProductColorTbl" />
+        </EntityType>
+        <EntityType Name="UserTbl">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int64" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmailID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MobileNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ProductTbl_CategoryTbl">
+          <End Role="CategoryTbl" Type="Self.CategoryTbl" Multiplicity="1" />
+          <End Role="ProductTbl" Type="Self.ProductTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryTbl">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="ProductTbl">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductColorTbl_ColorTbl">
+          <End Role="ColorTbl" Type="Self.ColorTbl" Multiplicity="1" />
+          <End Role="ProductColorTbl" Type="Self.ProductColorTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ColorTbl">
+              <PropertyRef Name="ColorID" />
+            </Principal>
+            <Dependent Role="ProductColorTbl">
+              <PropertyRef Name="ColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductTbl_MfgTbl">
+          <End Role="MfgTbl" Type="Self.MfgTbl" Multiplicity="1" />
+          <End Role="ProductTbl" Type="Self.ProductTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MfgTbl">
+              <PropertyRef Name="MfgID" />
+            </Principal>
+            <Dependent Role="ProductTbl">
+              <PropertyRef Name="MfgID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductColorTbl_ProductTbl">
+          <End Role="ProductTbl" Type="Self.ProductTbl" Multiplicity="1" />
+          <End Role="ProductColorTbl" Type="Self.ProductColorTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductTbl">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="ProductColorTbl">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Mini_Project_DbFirstEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CategoryTbls" EntityType="Self.CategoryTbl" />
+          <EntitySet Name="ColorTbls" EntityType="Self.ColorTbl" />
+          <EntitySet Name="MfgTbls" EntityType="Self.MfgTbl" />
+          <EntitySet Name="ProductColorTbls" EntityType="Self.ProductColorTbl" />
+          <EntitySet Name="ProductTbls" EntityType="Self.ProductTbl" />
+          <EntitySet Name="UserTbls" EntityType="Self.UserTbl" />
+          <AssociationSet Name="FK_ProductTbl_CategoryTbl" Association="Self.FK_ProductTbl_CategoryTbl">
+            <End Role="CategoryTbl" EntitySet="CategoryTbls" />
+            <End Role="ProductTbl" EntitySet="ProductTbls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductColorTbl_ColorTbl" Association="Self.FK_ProductColorTbl_ColorTbl">
+            <End Role="ColorTbl" EntitySet="ColorTbls" />
+            <End Role="ProductColorTbl" EntitySet="ProductColorTbls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductTbl_MfgTbl" Association="Self.FK_ProductTbl_MfgTbl">
+            <End Role="MfgTbl" EntitySet="MfgTbls" />
+            <End Role="ProductTbl" EntitySet="ProductTbls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductColorTbl_ProductTbl" Association="Self.FK_ProductColorTbl_ProductTbl">
+            <End Role="ProductTbl" EntitySet="ProductTbls" />
+            <End Role="ProductColorTbl" EntitySet="ProductColorTbls" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Mini_Project_DbFirstModelStoreContainer" CdmEntityContainer="Mini_Project_DbFirstEntities">
+          <EntitySetMapping Name="CategoryTbls">
+            <EntityTypeMapping TypeName="Mini_Project_DbFirstModel.CategoryTbl">
+              <MappingFragment StoreEntitySet="CategoryTbl">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ColorTbls">
+            <EntityTypeMapping TypeName="Mini_Project_DbFirstModel.ColorTbl">
+              <MappingFragment StoreEntitySet="ColorTbl">
+                <ScalarProperty Name="ColorID" ColumnName="ColorID" />
+                <ScalarProperty Name="ColorName" ColumnName="ColorName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MfgTbls">
+            <EntityTypeMapping TypeName="Mini_Project_DbFirstModel.MfgTbl">
+              <MappingFragment StoreEntitySet="MfgTbl">
+                <ScalarProperty Name="MfgID" ColumnName="MfgID" />
+                <ScalarProperty Name="MfgName" ColumnName="MfgName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="WebsiteUrl" ColumnName="WebsiteUrl" />
+                <ScalarProperty Name="ContactPersonName" ColumnName="ContactPersonName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductColorTbls">
+            <EntityTypeMapping TypeName="Mini_Project_DbFirstModel.ProductColorTbl">
+              <MappingFragment StoreEntitySet="ProductColorTbl">
+                <ScalarProperty Name="ProductColorID" ColumnName="ProductColorID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ColorID" ColumnName="ColorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductTbls">
+            <EntityTypeMapping TypeName="Mini_Project_DbFirstModel.ProductTbl">
+              <MappingFragment StoreEntitySet="ProductTbl">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="MfgID" ColumnName="MfgID" />
+                <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserTbls">
+            <EntityTypeMapping TypeName="Mini_Project_DbFirstModel.UserTbl">
+              <MappingFragment StoreEntitySet="UserTbl">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

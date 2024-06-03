@@ -1,0 +1,54 @@
+﻿@model  Mini_Project.Areas.UserArea.ProductTbl
+@{
+    Layout = "~/Areas/UserArea/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <h2> Product Details </h2>
+    <div>
+        <dl>
+          <div>
+                @Html.DisplayNameFor(p=>p.ProductName):
+                @Html.DisplayFor(p=>p.ProductName)
+            </div>
+
+          <div>
+              @Html.DisplayNameFor(p => p.Price):
+              @Html.DisplayFor(p => p.Price)
+          </div>
+          <div>
+              @Html.DisplayNameFor(p => p.ProductDescription):
+              @Html.DisplayFor(p => p.ProductDescription)
+          </div>
+
+          <div>
+              @Html.DisplayNameFor(p => p.CategoryTbl.CategoryName):
+              @Html.DisplayFor(p => p.CategoryTbl.CategoryName)
+          </div>
+          <div>
+              @Html.DisplayNameFor(p => p.MfgTbl.MfgName):
+              @Html.DisplayFor(p => p.MfgTbl.MfgName)
+          </div>
+            <div>
+                @Html.Label("Product Colors:")
+                @foreach(var temp in Model.ProductColorTbls)
+            {
+                <span>
+                    @temp.ColorTbl.ColorName
+                </span>
+            }
+            </div>
+        </dl>
+        <div>
+            @Html.ActionLink("Back to Index", "Index")
+        </div>
+    </div>
+</body>
+</html>

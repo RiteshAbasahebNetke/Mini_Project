@@ -1,0 +1,57 @@
+﻿@model Mini_Project.Areas.UserArea.MfgTbl
+@{
+    Layout = "~/Areas/UserArea/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+    <div> 
+        @using (Html.BeginForm())
+            {
+            @Html.HiddenFor(p=>p.MfgID)
+                <div>
+                    @Html.LabelFor(p=>p.MfgName)
+                    <div>
+                        @Html.EditorFor(p=>p.MfgName)
+                    </div>
+                </div>
+                <div>
+                    @Html.LabelFor(p=>p.Address)
+                    <div>
+                        @Html.EditorFor(p=>p.Address)
+                    </div>
+                </div>
+                <div>
+                    @Html.LabelFor(p=>p.EmailID)
+                    <div>
+                        @Html.EditorFor(p=>p.EmailID)
+                    </div>
+                </div>
+                <div>
+                    @Html.LabelFor(p=>p.WebsiteUrl)
+                    <div>
+                        @Html.EditorFor(p=>p.WebsiteUrl)
+                    </div>
+                </div>
+                <div>
+                    @Html.LabelFor(p=>p.ContactPersonName)
+                    <div>
+                        @Html.EditorFor(p=>p.ContactPersonName)
+                    </div>
+                </div>
+                <div>
+                    <input type="submit" value="Update" />
+                </div>
+            }
+        <div>
+            @Html.ActionLink("Back to Index","Index")
+        </div>
+    </div>
+</body>
+</html>

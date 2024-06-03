@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Mini_Project.Areas.UserArea.MfgTbl>
+@{
+    Layout = "~/Areas/UserArea/Views/Shared/_LayoutPage1.cshtml";
+    int SrNo = 1;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    @Html.ActionLink("Add Mfg","Create")
+    <div> 
+        <table border="1">
+            <thead>
+                <tr>
+                    <th> Sr.No </th>
+                    <th> @Html.DisplayNameFor(p => p.MfgName) </th>
+                    <th> @Html.DisplayNameFor(p => p.Address) </th>
+                    <th> @Html.DisplayNameFor(p => p.EmailID) </th>
+                    <th> @Html.DisplayNameFor(p => p.WebsiteUrl) </th>
+                    <th> @Html.DisplayNameFor(p => p.ContactPersonName) </th>
+                    <th> Action Links </th>
+                </tr>
+            </thead>
+            @foreach(var temp in Model)
+            {
+                <tr>
+                    <td> @(SrNo++)</td>
+                    <td> @Html.DisplayFor(p => temp.MfgName) </td>
+                    <td> @Html.DisplayFor(p => temp.Address) </td>
+                    <td> @Html.DisplayFor(p => temp.EmailID) </td>
+                    <td> @Html.DisplayFor(p => temp.WebsiteUrl) </td>
+                    <td> @Html.DisplayFor(p => temp.ContactPersonName) </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = temp.MfgID })
+                        @Html.ActionLink("Delete", "Delete", new { id = temp.MfgID })
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>

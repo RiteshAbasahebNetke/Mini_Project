@@ -1,0 +1,71 @@
+﻿@model Mini_Project.Models.UserVM
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html style="border: thick solid; border-color: crimson;background-color:antiquewhite;text-align:center;">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SignUp</title>
+</head>
+<body>
+    <h1> Register New User </h1>
+    <div>
+        @using (Html.BeginForm())
+        {
+           
+            <div>
+                @Html.ValidationSummary(true)
+            </div>
+            <div>
+                @Html.LabelFor(p => p.FirstName)
+                <div>
+                    @Html.EditorFor(p => p.FirstName) <br />
+                    @Html.ValidationMessageFor(p => p.FirstName)
+                </div>
+            </div>
+            <div>
+                @Html.LabelFor(p => p.LastName)
+                <div>
+                    @Html.EditorFor(p => p.LastName) <br />
+                    @Html.ValidationMessageFor(p => p.LastName) 
+                </div>
+            </div> 
+            <div>
+                @Html.LabelFor(p => p.Address)
+                <div>
+                    @Html.EditorFor(p => p.Address) <br />
+                    @Html.ValidationMessageFor(p => p.Address)
+                </div>
+            </div>
+            <div>
+                @Html.LabelFor(p => p.EmailID)
+                <div>
+                    @Html.EditorFor(p => p.EmailID) <br />
+                    @Html.ValidationMessageFor(p => p.EmailID)
+                </div>
+            </div>
+            <div>
+                @Html.LabelFor(p => p.MobileNo)
+                <div>
+                    @Html.EditorFor(p => p.MobileNo) <br />
+                    @Html.ValidationMessageFor(p => p.MobileNo)
+                </div>
+            </div>
+            <div>
+                @Html.LabelFor(p => p.Password)
+                <div>
+                    @Html.EditorFor(p => p.Password) <br />
+                    @Html.ValidationMessageFor(p => p.Password)
+                </div>
+            </div>
+            <div>
+                <input type="submit" value="Save" />
+                @Html.ActionLink("Click here to SignIn", "SignIn")
+            </div>
+        }
+    </div>
+</body>
+</html>
